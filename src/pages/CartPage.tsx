@@ -12,9 +12,11 @@ import { PaymentForm } from "../components/PaymentFormComponent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useContext } from "react";
 import { GeneralContext } from "../store/GeneralProvider";
+import { useNavigate } from "react-router-dom";
 
 export const CartPage = () => {
   const { cartList, handleClearAllCart, isMobile } = useContext(GeneralContext);
+  const navigate = useNavigate();
 
   const subtotal = cartList.reduce(
     (acc, { price, count }) => (acc += price * count),
@@ -58,7 +60,12 @@ export const CartPage = () => {
               </List>
             ))
           ) : (
-            <Typography textAlign="center" padding={1} border={1}>
+            <Typography
+              variant={isMobile ? "h6" : "h5"}
+              textAlign="center"
+              padding={isMobile ? 1 : 6}
+              border={1}
+            >
               Any products in cart. Add something in the shop!
             </Typography>
           )}
@@ -73,7 +80,6 @@ export const CartPage = () => {
           gap={isMobile ? "19px" : "0"}
         >
           <Button
-            href="/shop"
             sx={{
               display: "flex",
               alignItems: "center",
@@ -81,6 +87,7 @@ export const CartPage = () => {
               color: "#000",
               textDecoration: "none",
             }}
+            onClick={() => navigate("/shop")}
           >
             <KeyboardArrowLeftIcon />
             <Typography
