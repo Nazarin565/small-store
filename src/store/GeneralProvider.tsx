@@ -45,7 +45,7 @@ export const GeneralProvider: React.FC<Props> = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(updatedList));
         return updatedList;
       } else {
-        const updatedList = [{ ...item, count: 1 }, ...prev];
+        const updatedList = [item, ...prev];
         localStorage.setItem("cart", JSON.stringify(updatedList));
         return updatedList;
       }
